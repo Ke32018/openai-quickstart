@@ -14,7 +14,11 @@ class Writer:
     def __init__(self):
         pass
 
-    def save_translated_book(self, book: Book, output_file_path: str = None, file_format: str = "PDF"):
+    def save_translated_book(self, book_list, output_file_path: str = None, file_format: str = "PDF"):
+        for book in book_list:
+            self._do_translate(book, output_file_path, file_format)
+
+    def _do_translate(self, book: Book, output_file_path: str = None, file_format: str = "PDF"):
         if file_format.lower() == "pdf":
             self._save_translated_book_pdf(book, output_file_path)
         elif file_format.lower() == "markdown":
@@ -25,6 +29,10 @@ class Writer:
     def _save_translated_book_pdf(self, book: Book, output_file_path: str = None):
         if output_file_path is None:
             output_file_path = book.pdf_file_path.replace('.pdf', f'_translated.pdf')
+        else:
+            if output_file_path.endswith("/"):
+                output_file_path = output_file_path + "/"
+            output_file_path = output_file_path + book.pdf_file_path.split("/")[-1]
 
         LOG.info(f"pdf_file_path: {book.pdf_file_path}")
         LOG.info(f"开始翻译: {output_file_path}")

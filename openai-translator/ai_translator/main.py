@@ -19,7 +19,8 @@ if __name__ == "__main__":
     model = OpenAIModel(model=model_name, api_key=api_key)
 
 
-    pdf_file_path = args.book if args.book else config['common']['book']
+    #pdf_file_path = args.book if args.book else config['common']['book']
+    pdf_file_path = args.book_dir if args.book_dir else config['common']['book_dir']
     file_format = args.file_format if args.file_format else config['common']['file_format']
 
     # 实例化 PDFTranslator 类，并调用 translate_pdf() 方法
