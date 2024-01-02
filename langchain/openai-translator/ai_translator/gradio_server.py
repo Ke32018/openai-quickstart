@@ -24,7 +24,15 @@ def launch_gradio():
         inputs=[
             gr.File(label="上传PDF文件"),
             gr.Textbox(label="源语言（默认：英文）", placeholder="English", value="English"),
-            gr.Textbox(label="目标语言（默认：中文）", placeholder="Chinese", value="Chinese")
+            gr.Textbox(label="目标语言（默认：中文）", placeholder="Chinese", value="Chinese"),
+            gr.Textbox(label="风格", placeholder="""输入你希望生成文字的翻译风格(以下是一些示例)
+# 诗歌 - Poetic Translation
+# 戏剧化 - Dramatic Translation
+# 小说 - Novelistic Translation
+# 新闻稿 - Press Release Translation
+# 法律文件 - Legal Document Translation
+# 广告营销 - Advertising & Marketing Translation
+                       """, value="normal")
         ],
         outputs=[
             gr.File(label="下载翻译文件")
@@ -32,7 +40,7 @@ def launch_gradio():
         allow_flagging="never"
     )
 
-    iface.launch(share=True, server_name="0.0.0.0")
+    iface.launch(share=True, server_name="127.0.0.1")
 
 def initialize_translator():
     # 解析命令行
